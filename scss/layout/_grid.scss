@@ -1,0 +1,62 @@
+/*
+from 
+https://github.com/KumarSidharth/12-column-grid
+*/
+:root {
+  --col-gap: 24px;
+  --row-gap: 24px;
+}
+$gridColumns: 12 !default;
+$gridRowGap: var(--row-gap) !default;
+$gridColumnGap: var(--col-gap) !default;
+
+.row,
+.grid {
+  display: grid;
+  row-gap: $gridRowGap;
+  column-gap: $gridColumnGap;
+  grid-template-columns: repeat($gridColumns, #{$gridColumns}fr);
+}
+/* default device
+  we wrap all column content for best results with
+  _layout-helpers.scss
+*/
+@include view-dv() {
+  @for $column from $gridColumns through 2 {
+    .c#{$column} {
+      grid-column: span 12;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  }
+}
+// default desktop
+@include view-ds() {
+  @for $column from $gridColumns through 2 {
+    .c#{$column} {
+      grid-column: span $column;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  }
+}
+@include view-s() {
+  @include createColumns("s");
+}
+@include view-m() {
+  @include createColumns("m");
+}
+@include view-sm() {
+  @include createColumns("sm");
+}
+@include view-ml() {
+  @include createColumns("ml");
+}
+@include view-l() {
+  @include createColumns("l");
+}
+@include view-w() {
+  @include createColumns("w");
+}

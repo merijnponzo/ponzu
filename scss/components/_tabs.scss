@@ -1,0 +1,47 @@
+$tab-transition: 0.3s ease all;
+$tab-selected: (
+  border-bottom: 2px solid var(--color-one),
+  background-color: var(--color-bg),
+  padding: rfs(0.75rem),
+);
+$tab-focus: (
+  border-bottom: 4px solid var(--color-one),
+  background-color: var(--color-bg),
+  padding: rfs(0.75rem),
+);
+$tab-li: (
+  padding: rfs(1rem),
+  margin: 2px,
+  color: var(--color-text),
+);
+.tabs__list {
+  display: flex;
+}
+.tabs__panel {
+  & > * {
+    display: none;
+  }
+  .selected {
+    display: block;
+  }
+}
+.tab {
+  display: block;
+  cursor: pointer;
+  transition: $tab-transition;
+  text-decoration: none;
+  @each $prop, $val in $tab-li {
+    #{$prop}: $val;
+  }
+}
+.tab:active {
+  @each $prop, $val in $tab-focus {
+    #{$prop}: $val;
+  }
+}
+.tab.selected {
+  text-decoration: none;
+  @each $prop, $val in $tab-selected {
+    #{$prop}: $val;
+  }
+}

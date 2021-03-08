@@ -1,0 +1,60 @@
+// variables
+$btn: (
+  color: var(--color-text),
+  border: 0px,
+  outline: 0px solid transparent,
+  padding-left: rfs(1rem),
+  padding-right: rfs(1rem),
+  border-radius: $border-radius-clickables
+);
+$btn-selected: (
+  outline: 1px solid var(--color-one),
+  background-color: var(--color-bg),
+  border-radius: $border-radius-clickables
+);
+$btn-focus: (
+  box-shadow: 0 0 2px 0 var(--color-one),
+  background-color: var(--color-bg)
+);
+$btn-line: (
+  border-width: 2px,
+  border-style: solid
+);
+$btn-animation: "tile";
+
+// .btn
+.btn {
+  @include appearance(none);
+  @include no-select();
+  height: rfs(#{$height-clickables});
+  font-size: var(--fs-btn);
+  font-family: fontGuide("fs-btn", "font-family");
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  @each $prop, $val in $btn {
+    #{$prop}: $val;
+  }
+  @include animate-hover(#{$btn-animation});
+}
+.btn:active {
+  @each $prop, $val in $btn-focus {
+    #{$prop}: $val;
+  }
+}
+.btn.line {
+  @each $prop, $val in $btn-line {
+    #{$prop}: $val;
+  }
+}
+@each $size-name, $i in $theme-resizers {
+  .btn {
+    &.#{$size-name} {
+      font-size: v("fs-btn-#{$size-name}");
+      background-color: $i;
+      height: rfs($height-clickables * $i);
+    }
+  }
+}

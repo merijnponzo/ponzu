@@ -1,0 +1,126 @@
+@mixin colorClasses($label, $tone, $background-color, $foreground-color) {
+  --color-#{$label}-#{$tone}: #{$background-color};
+  // move classes above :root
+  @at-root {
+    // add class
+    body {
+      .#{$label}-#{$tone} {
+        background: #{$background-color};
+        color: $foreground-color;
+      }
+    }
+  }
+}
+
+:root {
+  color: testing();
+  @each $label, $map in $colors {
+    $color: map-get($map, color);
+    $custom: map-get($map, custom);
+    $mix: map-get($map, mix);
+    @if $mix == null {
+      $mix: 0;
+    }
+    // tonsurton check
+    $tonsurton: map-get($map, tonsurton);
+    // create mix colors if mix is true
+    @if $mix > 1 {
+      $color-mix-divide: round($mix / 2);
+      $mix-steps: round(100 / ($color-mix-divide + 1));
+
+      // create classnames iterating from 1 to ... where 1 is the darkest
+      $mix-sum-dark: ($color-mix-divide + 1);
+      $mix-sum-light: ($color-mix-divide + 1) - 1;
+
+      @for $i from $mix-steps through 100 {
+        @if $i % $mix-steps == 0 {
+          $mix-sum-dark: $mix-sum-dark - 1;
+          $mix-sum-light: $mix-sum-light + 1;
+
+          $percentage: $i * 1%;
+          // create a dark tint
+          $dark-bg: mix(black, $color, $percentage);
+          // create a light tint
+          $light-bg: mix(white, $color, $percentage);
+
+          $light-text: choose-color-contrast($light-bg) !default;
+          $dark-text: choose-color-contrast($dark-bg) !default;
+          // create ton sur ton colors
+          @if $tonsurton == 1 {
+            $light-text: $dark-bg;
+            $dark-text: $light-bg;
+          }
+          // create dark classes
+          @include colorClasses($label, $mix-sum-dark, $dark-bg, $dark-text);
+          // create light classes
+          @include colorClasses($label, $mix-sum-light, $light-bg, $light-text);
+        }
+      }
+    }
+    // create pure .color-class and root variables
+    --color-#{$label}: #{$color};
+    @at-root {
+      body {
+        .#{$label} {
+          background: #{$color};
+          color: choose-color-contrast($color);
+        }
+        .#{$label}-b {
+          background: #{$color};
+        }
+        .#{$label}-f {
+          color: #{$color};
+        }
+      }
+    }
+    // create custom colors
+    @each $custom-colors in $custom {
+      @if $custom-colors != null {
+        $custom-color-name: map-get($custom-colors, name);
+        $custom-color-bg: map-get($custom-colors, bg);
+        $custom-color-text: map-get($custom-colors, text);
+        @include colorClasses(
+          $label,
+          $custom-color-name,
+          $custom-color-bg,
+          $custom-color-text
+        );
+      }
+    }
+  }
+}
+
+// create color themes
+@each $name, $bg-color, $text-color in $color-themes {
+  // set colors
+
+  // create data-theme
+  [data-theme="#{$name}"] {
+    background: var(--color-#{$name});
+    color: var(--color-#{$text-color});
+    // --color-bg-text: var(--color-#{$difference-text});
+    // --color-dbg: var(--color-#{$difference-bg});
+  }
+  // forecolor class
+  .fc--#{$name} {
+    color: var(--color-#{$name});
+  }
+  // background color
+  .bc--#{$name} {
+    color: var(--color-#{$name});
+  }
+}
+
+// set color class, overrule elements like .btn
+main {
+  @each $name, $bg-color, $text-color in $color-themes {
+    .#{$name} {
+      background-color: #{$bg-color};
+      color: #{$text-color};
+    }
+    .#{$name}.line {
+      border-color: #{$bg-color};
+      background-color: transparent;
+    }
+  }
+}

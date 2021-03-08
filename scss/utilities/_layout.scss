@@ -1,0 +1,8 @@
+// create columns :
+@mixin createColumns($breakpoint) {
+  @for $column from $gridColumns through 2 {
+    .c#{$column}\3a#{$breakpoint} {
+      grid-column: span $column;
+    }
+  }
+}

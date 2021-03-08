@@ -1,0 +1,15 @@
+html {
+  font-size: 16px;
+  font-family: var(--font-read);
+}
+
+@include view-l {
+  html {
+    font-size: 16px;
+  }
+}
+@include view-w {
+  html {
+    font-size: 17px;
+  }
+}

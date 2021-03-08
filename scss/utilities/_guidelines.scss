@@ -1,0 +1,28 @@
+// The fontguide
+@function fontGuide($find, $returnprop: 0, $resize: 0) {
+  $return-value: 0;
+  @each $name, $fontsize, $scalefactor, $classname, $font-family, $font-weight,
+    $line-height, $text-transform in $theme-typography
+  {
+    @if $name == $find {
+      @if $returnprop == "font-family" {
+        $return-value: v($font-family);
+      } @else if $returnprop == "font-size" {
+        $fs-resize: $name;
+        // add large or small
+        @if ($resize != 0) {
+          $fs-resize: "#{$name}-#{$resize}";
+        }
+        $return-value: v($fs-resize);
+      } @else if $returnprop == "font-weight" {
+        $return-value: $font-weight;
+      } @else if $returnprop == "line-height" {
+        $return-value: $line-height;
+      } @else if $returnprop == "text-transform" {
+        $return-value: $text-transform;
+      }
+    }
+  }
+  // @debug "test: #{$find} #{$return-value} #{$returnprop}";
+  @return $return-value;
+}

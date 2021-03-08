@@ -1,0 +1,129 @@
+// BREAKPOINTS
+$view-s: 480px !default;
+$view-m: 960px !default;
+$view-d: 1020px !default;
+$view-l: 1260px !default;
+$view-w: 1680px !default;
+
+// RESIZERS
+$theme-resizers: (
+  "toy": 0.66,
+  "big": 1.33,
+);
+// TYPOGRAPHY
+$theme-typography: (
+  ("fs-hero", 80px, 35%, "fs__h", "expressive", normal, 0.9, inherit),
+  ("fs-title", 40px, 25%, "fs__t", "expressive", bold, 1.1, Uppercase),
+  ("fs-subtitle", 40px, 35%, "fs__s", "productive", normal, 1.1, inherit),
+  ("fs-read", 18px, 33%, "fs__r", "productive", normal, 1.2, inherit),
+  ("fs-quote", 36px, 25%, "fs__q", "expressive", normal, 1.1, inherit),
+  ("fs-label", 18px, 25%, "fs__l", "expressive", normal, 1.1, inherit),
+  ("fs-input", 18px, 25%, "fs__i", "productive", normal, 1.1, inherit),
+  ("fs-btn", 18px, 15%, "fs__b", "expressive", normal, 1.1, Uppercase),
+  ("fs-meta", 14px, 25%, "fs__m", "productive", normal, 1.1, inherit),
+  ("fs-nav", 16px, 25%, "fs__n", "productive", normal, 1.1, Uppercase),
+  ("fs-icon", 16px, 15%, "fs__ico", "icons", normal, 1.1, inherit),
+  ("fs-author", 16px, 15%, "fs__a", "expressive", normal, 1.1, Uppercase)
+) !default;
+
+// BASIC COLORS
+
+// COLORS
+$colors: (
+  one: (
+    color: rgb(75, 199, 110),
+    mix: 4,
+    custom: (
+      (
+        name: "light",
+        bg: rgb(23, 128, 39),
+        text: white,
+      ),
+    ),
+    tonsurton: 0,
+  ),
+  two: (
+    color: rgb(0, 169, 110),
+    mix: 0,
+  ),
+  three: (
+    color: rgb(213, 170, 0),
+    mix: 4,
+  ),
+  danger: (
+    color: rgb(213, 170, 0),
+  ),
+  bg: (
+    color: rgb(179, 179, 179),
+    mix: 1,
+  ),
+  text: (
+    color: rgb(0, 0, 0),
+    mix: 1,
+  ),
+  default: (
+    color: rgb(255, 255, 255),
+    mix: 1,
+  ),
+);
+// THEME COLORS
+/* 
+name, 
+background-color, 
+text-color, 
+text-color with line element
+*/
+$color-themes: ();
+
+// reduced helpers (saves 9kb)
+// classname, percentage width, max width in pixels, array of breakpoints
+$helpers-layout-width: (
+  ("w--25", 25%, 250px, ("dv", "ds")),
+  ("w--50", 50%, 500px, ("dv", "ds")),
+  ("w--75", 75%, 750px, ("dv", "ds")),
+  ("w--100", 100%, 1000px, ("dv", "ds"))
+) !default;
+
+// classname, default padding-top, (breakpoints: padding-top)
+$helpers-layout-ratio: (
+  (
+    "r--1x1",
+    100%,
+    (
+      "dv": 100%,
+      "ds": 100%,
+    )
+  ),
+  (
+    "r--16x9",
+    56.25%,
+    (
+      "dv": 56.25%,
+      "ds": 56.25%,
+    )
+  ),
+  (
+    "r--4x3",
+    75%,
+    (
+      "dv": 75%,
+      "ds": 75%,
+    )
+  ),
+  (
+    "r--3x4",
+    125%,
+    (
+      "dv": 125%,
+      "ds": 125%,
+    )
+  )
+) !default;
+
+$minimum-fontsize: 14px;
+// Theme heights btn, tab
+$height-clickables: 2.5rem;
+// Theme border-radis
+$border-radius-containers: 10px;
+$border-radius-clickables: 50px;
+$border-radius-images: 4px;

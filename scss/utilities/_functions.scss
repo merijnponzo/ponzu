@@ -1,0 +1,55 @@
+// https://dev.to/meduzen/write-css-variables-faster-in-scss-1mon
+@function v($var) {
+  @return var(--#{$var});
+}
+
+//https://css-tricks.com/snippets/sass/tint-shade-functions/
+@function lighten($color, $percentage, $mix-color: white) {
+  @return mix(mix-color, $color, $percentage);
+}
+@function darken($color, $percentage, $mix-color: black) {
+  @return mix($mix-color, $color, $percentage);
+}
+
+@function invert($color, $amount: 100%) {
+  $inverse: change-color($color, $hue: hue($color) + 180);
+  @return mix($inverse, $color, $amount);
+}
+
+/**
+ * Calculate the luminance for a color.
+ * See https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-tests
+ */
+@function color-luminance($color) {
+  $red: nth($linear-channel-values, red($color) + 1);
+  $green: nth($linear-channel-values, green($color) + 1);
+  $blue: nth($linear-channel-values, blue($color) + 1);
+
+  @return 0.2126 * $red + 0.7152 * $green + 0.0722 * $blue;
+}
+
+/**
+ * Calculate the contrast ratio between two colors.
+ * See https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-tests
+ */
+@function color-contrast($back, $front) {
+  $backLum: color-luminance($back) + 0.05;
+  $foreLum: color-luminance($front) + 0.05;
+
+  @return max($backLum, $foreLum) / min($backLum, $foreLum);
+}
+
+/**
+ * Determine whether to use dark or light text on top of given color.
+ * Returns black for dark text and white for light text.
+ */
+@function choose-color-contrast($color) {
+  $lightContrast: color-contrast($color, white);
+  $darkContrast: color-contrast($color, black);
+
+  @if ($lightContrast > $darkContrast) {
+    @return white;
+  } @else {
+    @return black;
+  }
+}
