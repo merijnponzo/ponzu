@@ -102,11 +102,11 @@
     // --color-dbg: var(--color-#{$difference-bg});
   }
   // forecolor class
-  .fc--#{$name} {
+  .#{$name}-c {
     color: var(--color-#{$name});
   }
   // background color
-  .bc--#{$name} {
+  .#{$name}-b {
     color: var(--color-#{$name});
   }
 }

@@ -1,8 +1,16 @@
 html {
   font-size: 16px;
   font-family: var(--font-read);
+  box-sizing: border-box;
+  line-height: 1.1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-
+:root {
+  --space-base: rfs(#{get-space-value("base")});
+  --space-half: rfs(#{get-space-value("half")});
+  --space-quart: rfs(#{get-space-value("quart")});
+}
 @include view-l {
   html {
     font-size: 16px;
@@ -10,6 +18,6 @@ html {
 }
 @include view-w {
   html {
-    font-size: 17px;
+    font-size: 18px;
   }
 }

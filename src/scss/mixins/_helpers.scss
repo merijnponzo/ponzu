@@ -1,0 +1,72 @@
+@mixin appearance($value) {
+  -webkit-appearance: $value;
+  -moz-appearance: $value;
+  appearance: $value;
+}
+
+@mixin no-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+// create a width class like w--50:breakpoint
+@mixin max-width-class($name, $width-percent, $max-width-px, $breakpoint: 0) {
+  @if $breakpoint == "all" {
+    .#{$name} {
+      width: $width-percent;
+      max-width: (#{$max-width-px});
+    }
+  } @else {
+    .#{$name}\3a#{$breakpoint} {
+      width: $width-percent;
+      max-width: (#{$max-width-px});
+    }
+  }
+}
+@mixin ratio-class($name, $w, $h, $breakpoint: 0) {
+  @if $breakpoint == "all" {
+    .#{$helpers-layout-ratio-prefix}#{$name} {
+      &:before {
+        content: " ";
+        display: block;
+        width: 100%;
+        padding-top: ($h / $w) * 100%;
+      }
+    }
+  } @else {
+    .#{$helpers-layout-ratio-prefix}#{$name}\3a#{$breakpoint} {
+      &:before {
+        content: " ";
+        display: block;
+        width: 100%;
+        padding-top: ($w / $h) * 100%;
+      }
+    }
+  }
+}
+// create a width class like w--50:breakpoint
+@mixin any-property-class(
+  $name,
+  $sub-name,
+  $value,
+  $css-properties,
+  $breakpoint: 0
+) {
+  @if $breakpoint == "all" {
+    .#{$name}#{$sub-name} {
+      @each $css-property in $css-properties {
+        #{$css-property}: rfs(#{$value});
+      }
+    }
+  } @else if $breakpoint != 0 {
+    .#{$name}#{$sub-name}\3a#{$breakpoint} {
+      @each $css-property in $css-properties {
+        #{$css-property}: rfs(#{$value});
+      }
+    }
+  }
+}

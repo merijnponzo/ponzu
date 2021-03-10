@@ -1,5 +1,6 @@
 $box-list-style: disc !default;
-$box-fontfamily: var(--productive-1) !default;
+$box-space-base: get-space-value("base") !default;
+$box-space-half: get-space-value("half") !default;
 // GUTTER STEPS
 // DEFAULT
 .box {
@@ -10,11 +11,13 @@ $box-fontfamily: var(--productive-1) !default;
   flex-direction: column;
   flex-wrap: wrap;
   box-sizing: border-box;
-  padding: var(--box-pad);
-  font-family: $box-fontfamily;
+  grid-column: span 12;
+  clear: both;
+  width: 100%;
+  padding: rfs($box-space-base);
+  font-family: var(--productive);
   font-size: var(--fs-read);
   line-height: fontGuide("fs-read", "line-height");
-  width: 100%;
   // links
   a:link:not(.btn):not(.link):not(.tile):not(.more) {
     text-decoration: underline;
@@ -26,10 +29,6 @@ $box-fontfamily: var(--productive-1) !default;
   }
   .list {
     margin-top: rfs(1rem);
-  }
-  [class*="split--"] {
-    margin-top: rfs(1rem);
-    margin-bottom: rfs(1rem);
   }
   // lists, not for lists and tabs
   ul:not(.tabs):not(.list) ol {
@@ -43,41 +42,9 @@ $box-fontfamily: var(--productive-1) !default;
     display: block;
     margin: 1rem 0;
   }
-  // headings
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    display: block;
-    width: 100%;
-    margin-top: 0px;
-    margin-bottom: rfs(0.5rem);
+  .btn {
+    margin-top: 1rem;
   }
-  // paragraphs
-  p:not(:first-child),
-  pre {
-    margin-bottom: rfs(0.25rem);
-  }
-  & > span {
-    margin-bottom: rfs(0.5rem);
-  }
-  p:first-of-type {
-    margin-top: rfs(0.5rem);
-  }
-  // buttons
-  & > .btn:not(:first-child) {
-    margin-top: rfs(0.5rem);
-    align-self: baseline;
-  }
-  & > .btn {
-    margin-bottom: rfs(1rem);
-  }
-}
-//A column chained as a box receives the --row-pad variable
-.col.box {
-  padding: var(--row-pad);
 }
 .box.stretch {
   height: 100%;

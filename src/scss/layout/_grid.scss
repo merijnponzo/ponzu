@@ -17,6 +17,9 @@ $gridColumnGap: var(--col-gap) !default;
   column-gap: $gridColumnGap;
   grid-template-columns: repeat($gridColumns, #{$gridColumns}fr);
 }
+.row {
+  margin: 0 auto;
+}
 /* default device
   we wrap all column content for best results with
   _layout-helpers.scss
@@ -30,6 +33,7 @@ $gridColumnGap: var(--col-gap) !default;
       flex-wrap: wrap;
     }
   }
+  @include createColumns("dv");
 }
 // default desktop
 @include view-ds() {
@@ -41,11 +45,15 @@ $gridColumnGap: var(--col-gap) !default;
       flex-wrap: wrap;
     }
   }
+  @include createColumns("ds");
 }
 @include view-s() {
   @include createColumns("s");
 }
 @include view-m() {
+  .row {
+    max-width: $view-m;
+  }
   @include createColumns("m");
 }
 @include view-sm() {
@@ -55,8 +63,14 @@ $gridColumnGap: var(--col-gap) !default;
   @include createColumns("ml");
 }
 @include view-l() {
+  .row {
+    max-width: $view-l;
+  }
   @include createColumns("l");
 }
 @include view-w() {
+  .row {
+    max-width: $view-w;
+  }
   @include createColumns("w");
 }

@@ -1,0 +1,52 @@
+// default btn mixin
+@mixin btn-base(
+  $btn-base,
+  $btn-focus,
+  $btn-active,
+  $btn-disabled,
+  $animation: null
+) {
+  .btn {
+    @include appearance(none);
+    @include no-select();
+    height: rfs(#{$minimum-height-clickables});
+    font-size: var(--fs-btn);
+    font-family: fontGuide("fs-btn", "font-family");
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    @each $prop, $val in $btn-base {
+      #{$prop}: $val;
+    }
+    &:active {
+      @each $prop, $val in $btn-active {
+        #{$prop}: $val;
+      }
+    }
+    &:focus {
+      @each $prop, $val in $btn-focus {
+        #{$prop}: $val;
+      }
+    }
+    &:disabled,
+    [disabled] {
+      @each $prop, $val in $btn-disabled {
+        #{$prop}: $val;
+        cursor: cursor;
+        &:hover:after {
+          display: none;
+        }
+      }
+    }
+  }
+}
+// button line mixin
+@mixin btn-line($classname, $btn-line-properties) {
+  .btn.#{classname} {
+    @each $prop, $val in $btn-line {
+      #{$prop}: $val;
+    }
+  }
+}

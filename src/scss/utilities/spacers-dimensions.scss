@@ -1,0 +1,85 @@
+// generate width helpers
+#{$prioritize-helpers} {
+  @each $name, $width-percent, $max-width-px,
+    $breakpoints in $helpers-layout-width
+  {
+    @include max-width-class($name, $width-percent, $max-width-px);
+    @each $breakpoint in $breakpoints {
+      @include select-breakpoint($breakpoint) {
+        @include max-width-class(
+          $name,
+          $width-percent,
+          $max-width-px,
+          $breakpoint
+        );
+      }
+    }
+  }
+}
+// ratio
+// ratio base
+[class*="#{$helpers-layout-ratio-prefix}"] {
+  position: relative;
+  width: 100%;
+  > :first-child {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@mixin aspect-ratio($width, $height) {
+  position: relative;
+  &:before {
+    display: block;
+    content: " ";
+    width: 100%;
+    padding-top: ($height / $width) * 100%;
+  }
+
+  > .content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+@each $name, $width, $height, $breakpoints in $helpers-layout-ratio {
+  // generate width helpers width breakpoints
+  @each $breakpoint in $breakpoints {
+    @include select-breakpoint($breakpoint) {
+      @include ratio-class($name, $width, $height, $breakpoint);
+    }
+  }
+}
+
+#{$prioritize-helpers} {
+  // loop trough spacers (eg : pt- )
+  @each $name, $css-properties, $breakpoints in $helpers-layout-spacers {
+    // create spacer class on each spacing setting ( eg : 1 : 16px )
+    @each $sub-name, $value in $helpers-layout-spacing {
+      // (eg pt-1 )
+      @each $breakpoint in $breakpoints {
+        @include select-breakpoint($breakpoint) {
+          @include any-property-class(
+            $name,
+            $sub-name,
+            $value,
+            $css-properties,
+            $breakpoint
+          );
+        }
+      }
+    }
+  }
+}
+
+:root {
+  @each $name, $value in $helpers-layout-spacing {
+    --space-#{$name}: rfs(#{$value});
+  }
+}

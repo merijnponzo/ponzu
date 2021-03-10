@@ -1,0 +1,328 @@
+//
+// BREAKPOINTS [ views ]
+/* 
+adjustable in widths
+--------------------
+dv (device : @min 0 @max view-d)
+ds (desktop : @min view-d)
+--------------------
+s (small only)
+sm (small + medium)
+m (medium only)
+ml (medium + large)
+l (large only)
+lw (large + wide )
+w (wide)
+--------------------
+*/
+$view-t: 360px !default;
+$view-s: 480px !default;
+$view-m: 960px !default;
+$view-d: 1020px !default;
+$view-l: 1260px !default;
+$view-w: 1680px !default;
+//
+// MINIMUMS
+$minimum-fontsize: 14px !default;
+$minimum-height-clickables: 48px !default;
+//
+// RADIUS
+$border-radius-containers: 10px !default;
+$border-radius-clickables: 20px !default;
+$border-radius-images: 4px !default;
+//
+// PRIORITIZE CLASS
+/*
+  avoid !important
+  we use a prefix class (attached to main, body or html etc)
+  this will prioritize for example mt-2 (margin-top:2rem)
+  above .box { .btn { margin-top:1rem } }
+*/
+$prioritize-helpers: ".pz";
+//
+// FONTS
+/*
+  productive: readable type (paragraphs eg)
+  expressive: decorative type (headlines eg)
+  accent: help type (meta info, code blocks etc)
+  icon: icon set
+*/
+
+$theme-fonts: (
+  "productive": "'DM Sans', sans-serif",
+  "expressive": "'Inter', serif",
+  "accent":
+    "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+  "icon": "Glyphter",
+) !default;
+//
+// TYPOGRAPHY
+/*
+  Generates font classes and css vars
+  Helpfull within a designsystem
+  ("fs-hero", 80px, 35%, "fs__h", "expressive", normal, 0.9, inherit)
+  css-variable name, font-size, classname, theme-font, 
+  font-weight, line-height, text-transform, margin-top, layout-space margin-bottom
+*/
+$theme-typography: (
+  ("fs-hero", 80px, 35%, "fs__h", "expressive", normal, 0.9, inherit, "base"),
+  ("fs-title", 40px, 25%, "fs__t", "expressive", bold, 1.1, Uppercase, "quart"),
+  (
+    "fs-subtitle",
+    40px,
+    35%,
+    "fs__s",
+    "productive",
+    normal,
+    1.1,
+    inherit,
+    "half"
+  ),
+  ("fs-read", 18px, 33%, "fs__r", "productive", normal, 1.2, inherit),
+  ("fs-quote", 36px, 25%, "fs__q", "expressive", normal, 1.1, inherit, "base"),
+  ("fs-label", 18px, 25%, "fs__l", "accent", normal, 1.1, inherit, "half"),
+  ("fs-input", 18px, 25%, "fs__i", "productive", normal, 1.1, inherit, "half"),
+  ("fs-btn", 17px, 15%, "fs__b", "expressive", normal, 1.1, Uppercase),
+  ("fs-meta", 14px, 25%, "fs__m", "accent", normal, 1.1, inherit),
+  ("fs-nav", 16px, 25%, "fs__n", "productive", normal, 1.1, Uppercase),
+  ("fs-icon", 16px, 15%, "fs__ico", "icons", normal, 1.1, inherit),
+  ("fs-author", 16px, 15%, "fs__a", "expressive", normal, 1.1, Uppercase)
+) !default;
+//
+// DEFAULT TYPOGRAPHY
+/*
+  Generates default Semantic elements
+  ("h1", 48px, "expressive", normal, 1.2, inherit),
+  semantic name, font-size, theme-font, font-weight, line-height, text-transform
+*/
+$default-typography: (
+  ("h1", 48px, "expressive", normal, 1.2, inherit, "half"),
+  ("h2", 38px, "expressive", normal, 1.1, inherit, "half"),
+  ("h3", 28px, "productive", bold, 1.1, inherit, "half"),
+  ("h4", 22px, "productive", normal, 1.2, inherit, "half"),
+  ("h5", 18px, "expressive", normal, 1.1, inherit, "half"),
+  ("p", 17px, "productive", normal, 1.2, inherit, "half"),
+  ("input", 16px, "productive", normal, 1.1, inherit, "half"),
+  ("label", 16px, "productive", normal, 1.1, inherit, "half")
+) !default;
+
+//
+// COLOR SYSTEM
+/*
+  Generates color system
+  Add color objects to generate colors
+  Can be chained anywhere in the theme
+  Where color-key name can be 'one' or 'primary-color' etc
+  .btn.one
+  .box.two (etc)
+  color: Rgb | Hex
+  mix: Number
+  - create a color stepped mix from 1 to ..
+  - where 1 is the darkest mixed color
+  - .btn.one-8 (with mix:8 eg)
+  custom: (
+    - name (custom swatch name to chain one.light)
+    - bg (bg color)
+    - text
+  )
+  tonsurton: only available with mix
+*/
+$colors: (
+  one: (
+    color: rgb(75, 199, 110),
+    mix: 4,
+    tonsurton: 0,
+  ),
+  two: (
+    color: rgb(0, 62, 169),
+    mix: 8,
+    tonsurton: 1,
+  ),
+  info: (
+    color: rgb(0, 149, 213),
+    custom: (
+      (
+        name: "custom",
+        bg: rgb(62, 89, 101),
+        text: white,
+      ),
+    ),
+  ),
+  warning: (
+    color: rgb(213, 99, 0),
+  ),
+  bg: (
+    color: rgb(179, 179, 179),
+    custom: (
+      (
+        name: "dark",
+        bg: rgb(96, 96, 96),
+        text: white,
+      ),
+    ),
+  ),
+  black: (
+    color: rgb(0, 0, 0),
+    mix: 1,
+  ),
+  white: (
+    color: rgb(255, 255, 255),
+    mix: 1,
+  ),
+);
+// THEME COLORS
+/* 
+name, 
+background-color, 
+text-color, 
+text-color with line element
+*/
+$color-themes: ();
+//
+// RESIZERS
+/*
+  Generates resizers for buttons or typography etc
+  .btn.toy
+  avoid using sm, etc these are used for breakpoints
+*/
+$theme-resizers: (
+  "toy": 0.66,
+  "big": 1.33,
+) !default;
+//
+// SPACING
+/*
+  Create steps to space margins, paddings, gaps etc
+  Base Index can be used to create default paddings for boxes etc
+*/
+$helpers-layout-spacing: (
+  "0": 0px,
+  "1": 4px,
+  "2": 8px,
+  "3": 16px,
+  "4": 32px,
+  "5": 64px,
+  "6": 128px,
+);
+//
+// SPACE BASE
+/*
+  Set default measurements to work with
+  base, half and quart
+  compiled as root variables --space-base, --space-half etc
+  used within box paddings, margin-bottom for typography
+*/
+$helper-layout-space-base: "3" !default;
+$helper-layout-space-half: "2" !default;
+$helper-layout-space-quart: "1" !default;
+//
+// SPACING
+/*
+  generate all kind of layout spacers 
+  ("pt-", ("padding-top"), ("all", "dv", "ds")),
+  Classname, (Array: css-properties), (Array : breakpoints)
+  'all' refers to a default helper (for all breakpoints)
+
+  Note: Since each property is multiplied with breakpoints and spacing (above)
+  this feature does requires easily 25kb
+  Use purge Css to remove unused classes
+*/
+$helpers-layout-spacers: (
+  (
+    "p-",
+    ("padding-top", "padding-right", "padding-bottom", "padding-left"),
+    ("all", "dv", "ds")
+  ),
+  ("pt-", ("padding-top"), ("all", "dv", "ds")),
+  ("pr-", ("padding-right"), ("all", "dv", "ds")),
+  ("pb-", ("padding-bottom"), ("all", "dv", "ds")),
+  ("pl-", ("padding-left"), ("all", "dv", "ds")),
+  ("px-", ("padding-left", "padding-right"), ("all", "dv", "ds")),
+  ("py-", ("padding-top", "padding-bottom"), ("all", "dv", "ds")),
+  (
+    "m-",
+    ("margin-top", "margin-right", "margin-bottom", "margin-left"),
+    ("all", "dv", "ds")
+  ),
+  ("mt-", ("margin-top"), ("all", "dv", "ds")),
+  ("mr-", ("margin-right"), ("all", "dv", "ds")),
+  ("mb-", ("margin-bottom"), ("all", "dv", "ds")),
+  ("ml-", ("margin-left"), ("all", "dv", "ds")),
+  ("mx-", ("margin-left", "margin-right"), ("all", "dv", "ds")),
+  ("my-", ("margin-top", "margin-bottom"), ("all", "dv", "ds")),
+  ("gap-", ("gap"), ("all", "dv", "ds"))
+) !default;
+
+//
+// SPACING
+/*
+  create width classes
+  ("w-25", 25%, 250px, ("all", "dv", "ds")),
+  Classname, procentual width, min-width, (Array: Breakpoints)
+*/
+$helpers-layout-width: (
+  ("w-25", 25%, 250px, ("all", "dv", "ds")),
+  ("w-50", 50%, 500px, ("all", "dv", "ds")),
+  ("w-75", 75%, 750px, ("all", "dv", "ds")),
+  ("w-100", 100%, 1000px, ("all", "dv", "ds"))
+) !default;
+//
+// RATIO
+/*
+  create ratio's
+  ("1x1", 1, 1, ("all", "dv", "ds")),
+  Classname, Width, Height (Array: Breakpoints)
+*/
+// classname, width height, (breakpoints)
+$helpers-layout-ratio-prefix: "r-";
+$helpers-layout-ratio: (
+  ("1x1", 1, 1, ("all", "dv", "ds")),
+  ("16x9", 16, 9, ("all", "dv", "ds")),
+  ("4x3", 4, 3, ("all", "dv", "ds")),
+  ("3x4", 3, 4, ("all", "dv", "ds"))
+) !default;
+//
+// BUTTONS
+/*
+*/
+$btn-base: (
+  border: 0px,
+  outline: 0px solid transparent,
+  padding: var(--space-base),
+  border-radius: $border-radius-clickables,
+  align-self: flex-start,
+);
+$btn-focus: (
+  outline: 1px solid var(--color-one),
+  background-color: var(--color-bg),
+  border-radius: $border-radius-clickables,
+);
+$btn-active: (
+  box-shadow: 0 0 2px 0 var(--color-one),
+  background-color: var(--color-bg),
+);
+$btn-line: (
+  border-width: 2px,
+  border-style: solid,
+);
+$btn-disabled: (
+  background-color: var(--color-bg),
+);
+$btn-animation: "tile";
+//
+// ANIMATIONS
+/*
+*/
+$ani-tile-start: (
+  width: 0px,
+  height: 50%,
+  background: var(--color-bg),
+  transition: 0.15s ease all,
+  opacity: 0.2,
+);
+$ani-tile-end: (
+  width: 100%,
+  height: 100%,
+  background: var(--color-bg-dark),
+  transition: 0.2s ease all,
+);

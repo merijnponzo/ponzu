@@ -12,10 +12,14 @@ $default-font: var(productive);
 
 //create 3 sizes of fontsize css variables of each fonttype
 :root {
+  @each $name, $font-values in $theme-fonts {
+    --#{$name}: #{$font-values};
+  }
   // FONTCLASSES
   // ("fs-hero", 80px, 35%, "fs__h", "expressive", normal, 0.9, inherit),
   @each $name, $fontsize, $scalefactor, $font-classname, $font-family,
-    $font-weight, $line-height, $text-transform in $theme-typography
+    $font-weight, $line-height, $text-transform,
+    $space-base in $theme-typography
   {
     // set small normal and large font-size
     $toy: "#{$name}-toy";
@@ -26,6 +30,10 @@ $default-font: var(productive);
     $fontsize-normal: $fontsize;
     $fontsize-big: $fontsize / ((100% - $scalefactor) / 100%);
 
+    $font-margin-bottom: 0px !default;
+    @if ($space-base != null) {
+      $font-margin-bottom: get-space-value($space-base);
+    }
     @if $fontsize-toy < 14px {
       $fontsize-toy: $minimum-fontsize;
     }
@@ -41,6 +49,7 @@ $default-font: var(productive);
         font-family: v($font-family);
         font-weight: $font-weight;
         text-transform: $text-transform;
+        margin-bottom: rfs($font-margin-bottom);
         //scale icons as well;
         .pi:before {
           font-size: v($name);
@@ -74,51 +83,26 @@ html {
     -moz-osx-font-smoothing: grayscale;
   }
 }
-h1 {
-  font-size: rfs(50px);
-  font-weight: fontGuide("fs-title", "font-weight");
-}
-h2 {
-  font-size: rfs(38px);
-  font-weight: fontGuide("fs-title", "font-weight");
-}
-h3 {
-  font-size: rfs(20px);
-  font-weight: fontGuide("fs-title", "font-weight");
-}
-h4 {
-  font-size: rfs(18px);
-  font-weight: fontGuide("fs-read", "font-weight");
-}
-h5 {
-  font-size: rfs(18px);
-  font-weight: fontGuide("fs-read", "font-weight");
-}
-h6 {
-  font-size: var(--fs-read-toy);
-  font-weight: fontGuide("fs-read", "font-weight");
-}
-p,
-li {
-  font-size: var(--fs-read);
-  line-height: $line-height;
-  font-family: var(--productive);
-  margin-block-start: 0px;
-  margin-block-end: 0px;
-  word-break: break-word;
-  white-space: normal;
-  overflow-wrap: break-word;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--productive);
-  margin-block-start: 0px;
-  margin-block-end: 0px;
-  word-break: break-word;
-  white-space: normal;
-  overflow-wrap: break-word;
+// ("h1", 48px, "expressive", normal, 0.9, inherit),
+// GENERATE DEFAULT HEADINGS ETC
+@each $name, $font-size, $font-family, $font-weight, $line-height,
+  $text-transform, $space-base in $default-typography
+{
+  $font-margin-bottom: 0px !default;
+  @if ($space-base != null) {
+    $font-margin-bottom: get-space-value($space-base);
+  }
+  #{$name} {
+    font-family: v(#{$font-family});
+    line-height: $line-height;
+    text-transform: $text-transform;
+    font-weight: $font-weight;
+    font-size: rfs(#{$font-size});
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    word-break: break-word;
+    white-space: normal;
+    overflow-wrap: break-word;
+    margin-bottom: rfs($font-margin-bottom);
+  }
 }
