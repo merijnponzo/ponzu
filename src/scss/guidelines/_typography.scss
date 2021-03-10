@@ -1,0 +1,124 @@
+//headings
+$heading-weight: normal;
+$heading-transform: inherit;
+$heading-spacing: -0.02em;
+$bread-weight: normal;
+//general typography
+$line-height: 1.25em;
+$fontaliasing: true;
+$fontsize-body: 16px !default;
+$text-transform: inherit;
+$default-font: var(productive);
+
+//create 3 sizes of fontsize css variables of each fonttype
+:root {
+  // FONTCLASSES
+  // ("fs-hero", 80px, 35%, "fs__h", "expressive", normal, 0.9, inherit),
+  @each $name, $fontsize, $scalefactor, $font-classname, $font-family,
+    $font-weight, $line-height, $text-transform in $theme-typography
+  {
+    // set small normal and large font-size
+    $toy: "#{$name}-toy";
+    $normal: "#{$name}";
+    $big: "#{$name}-big";
+    // calculate 3 steps of fontsizes
+    $fontsize-toy: $fontsize * ((100% - $scalefactor) / 100%);
+    $fontsize-normal: $fontsize;
+    $fontsize-big: $fontsize / ((100% - $scalefactor) / 100%);
+
+    @if $fontsize-toy < 14px {
+      $fontsize-toy: $minimum-fontsize;
+    }
+    // set variables
+    --#{$toy}: rfs(#{$fontsize-toy});
+    --#{$normal}: rfs(#{$fontsize-normal});
+    --#{$big}: rfs(#{$fontsize-big});
+
+    @at-root {
+      .#{$font-classname} {
+        font-size: v($name);
+        line-height: $line-height;
+        font-family: v($font-family);
+        font-weight: $font-weight;
+        text-transform: $text-transform;
+        //scale icons as well;
+        .pi:before {
+          font-size: v($name);
+        }
+        // chained resizers as well
+        @each $size-name, $i in $theme-resizers {
+          &.#{$size-name} {
+            $resizer: "#{$name}-#{$size-name}";
+            --#{$name}: var(--#{$resizer});
+          }
+        }
+      }
+      // and nested resizers as well
+      // nested resizers as well
+      @each $size-name, $i in $theme-resizers {
+        .#{$size-name} {
+          $resizer: "#{$name}-#{$size-name}";
+          --#{$name}: var(--#{$resizer});
+        }
+      }
+    }
+  }
+}
+
+// DEFAULT HTML
+html {
+  font-family: $default-font;
+  line-height: $line-height;
+  @if $fontaliasing {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+h1 {
+  font-size: rfs(50px);
+  font-weight: fontGuide("fs-title", "font-weight");
+}
+h2 {
+  font-size: rfs(38px);
+  font-weight: fontGuide("fs-title", "font-weight");
+}
+h3 {
+  font-size: rfs(20px);
+  font-weight: fontGuide("fs-title", "font-weight");
+}
+h4 {
+  font-size: rfs(18px);
+  font-weight: fontGuide("fs-read", "font-weight");
+}
+h5 {
+  font-size: rfs(18px);
+  font-weight: fontGuide("fs-read", "font-weight");
+}
+h6 {
+  font-size: var(--fs-read-toy);
+  font-weight: fontGuide("fs-read", "font-weight");
+}
+p,
+li {
+  font-size: var(--fs-read);
+  line-height: $line-height;
+  font-family: var(--productive);
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+  word-break: break-word;
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--productive);
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+  word-break: break-word;
+  white-space: normal;
+  overflow-wrap: break-word;
+}

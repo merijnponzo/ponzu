@@ -1,0 +1,41 @@
+// tile variables
+$ani-tile-start: (
+  width: 0px,
+  height: 50%,
+  background: var(--color-bg),
+  transition: 0.15s ease all,
+  opacity: 0.2,
+);
+$ani-tile-end: (
+  width: 100%,
+  height: 100%,
+  background: var(--color-bg-dark),
+  transition: 0.2s ease all,
+);
+
+// visual interactions
+@mixin ani-tile($animation, $ani-trigger, $ani-tile-start, $ani-tile-end) {
+  // tile animation
+  @if $animation == "tile" {
+    position: relative;
+    &:after {
+      content: "";
+      display: block;
+      top: 0px;
+      left: 0px;
+      position: absolute;
+      transition: 1s ease all;
+      @each $prop, $val in $ani-tile-start {
+        #{$prop}: $val;
+      }
+    }
+    @debug $ani-trigger;
+    // hover, active, focus etc
+    &:#{$ani-trigger}:after {
+      transition: 1s ease all;
+      @each $prop, $val in $ani-tile-end {
+        #{$prop}: $val;
+      }
+    }
+  }
+}
