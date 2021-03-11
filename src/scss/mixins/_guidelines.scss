@@ -26,3 +26,18 @@
   // @debug "test: #{$find} #{$return-value} #{$returnprop}";
   @return $return-value;
 }
+
+@mixin colorClasses($label, $tone, $background-color, $foreground-color) {
+  --color-#{$label}-#{$tone}: #{$background-color};
+  --color-#{$label}-#{$tone}-text: #{$foreground-color};
+  // move classes above :root
+  @at-root {
+    // add class
+    body {
+      .#{$label}-#{$tone} {
+        background: #{$background-color};
+        color: $foreground-color;
+      }
+    }
+  }
+}

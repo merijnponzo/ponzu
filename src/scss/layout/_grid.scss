@@ -2,20 +2,18 @@
 from 
 https://github.com/KumarSidharth/12-column-grid
 */
-:root {
-  --col-gap: 24px;
-  --row-gap: 24px;
-}
+
 $gridColumns: 12 !default;
-$gridRowGap: var(--row-gap) !default;
-$gridColumnGap: var(--col-gap) !default;
 
 .row,
 .grid {
   display: grid;
-  row-gap: $gridRowGap;
-  column-gap: $gridColumnGap;
+  gap: var(--gap);
+  row-gap: var(--gap);
+  column-gap: var(--gap);
   grid-template-columns: repeat($gridColumns, #{$gridColumns}fr);
+  flex-direction: column;
+  flex-wrap: wrap;
 }
 .row {
   margin: 0 auto;
@@ -29,8 +27,8 @@ $gridColumnGap: var(--col-gap) !default;
     .c#{$column} {
       grid-column: span 12;
       display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
+      flex-direction: inherit;
+      flex-wrap: inherit;
     }
   }
   @include createColumns("dv");
@@ -41,8 +39,8 @@ $gridColumnGap: var(--col-gap) !default;
     .c#{$column} {
       grid-column: span $column;
       display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
+      flex-direction: inherit;
+      flex-wrap: inherit;
     }
   }
   @include createColumns("ds");

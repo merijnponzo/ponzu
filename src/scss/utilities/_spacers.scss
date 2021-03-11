@@ -1,0 +1,22 @@
+// space helper for margins, paddings etc
+
+#{$prioritize-helpers} {
+  // loop trough spacers (eg : pt- )
+  @each $name, $css-properties, $breakpoints in $helpers-layout-spacers {
+    // create spacer class on each spacing setting ( eg : 1 : 16px )
+    @each $sub-name, $value in $helpers-layout-scales {
+      // (eg pt-1 )
+      @each $breakpoint in $breakpoints {
+        @include select-breakpoint($breakpoint) {
+          @include any-property-class(
+            $name,
+            $sub-name,
+            $value,
+            $css-properties,
+            $breakpoint
+          );
+        }
+      }
+    }
+  }
+}

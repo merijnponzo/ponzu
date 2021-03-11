@@ -1,13 +1,14 @@
 // create the button
-@include btn-base(
-  $btn-base,
-  $btn-focus,
-  $btn-active,
-  $btn-disabled,
-  $btn-animation
-);
-@include btn-line("line", $btn-line);
-
+.btn {
+  @include btn-base(
+    $btn-base,
+    $btn-focus,
+    $btn-active,
+    $btn-disabled,
+    $btn-animation
+  );
+  @include btn-line("line", $btn-line);
+}
 // create button animation for hover
 .btn {
   @include ani-tile($btn-animation, "hover", $ani-tile-start, $ani-tile-end);
@@ -17,7 +18,7 @@
   .btn {
     &.#{$size-name} {
       font-size: v("fs-btn-#{$size-name}");
-      height: rfs($minimum-height-clickables * $i);
+      height: rfs(calc(var(--scale-btn) * #{$i}));
     }
   }
 }

@@ -22,14 +22,16 @@ $view-d: 1020px !default;
 $view-l: 1260px !default;
 $view-w: 1680px !default;
 //
+$html-fontsize-default: 16px;
+$html-fontsize-large: 16px;
+$html-fontsize-wide: 17px;
 // MINIMUMS
 $minimum-fontsize: 14px !default;
-$minimum-height-clickables: 48px !default;
-//
-// RADIUS
+//// BORDER WIDTHS
 $border-radius-containers: 10px !default;
 $border-radius-clickables: 20px !default;
 $border-radius-images: 4px !default;
+$border-width: 2px !default;
 //
 // PRIORITIZE CLASS
 /*
@@ -38,7 +40,7 @@ $border-radius-images: 4px !default;
   this will prioritize for example mt-2 (margin-top:2rem)
   above .box { .btn { margin-top:1rem } }
 */
-$prioritize-helpers: ".pz";
+$prioritize-helpers: "#pz";
 //
 // FONTS
 /*
@@ -65,8 +67,28 @@ $theme-fonts: (
   font-weight, line-height, text-transform, margin-top, layout-space margin-bottom
 */
 $theme-typography: (
-  ("fs-hero", 80px, 35%, "fs__h", "expressive", normal, 0.9, inherit, "base"),
-  ("fs-title", 40px, 25%, "fs__t", "expressive", bold, 1.1, Uppercase, "quart"),
+  (
+    "fs-hero",
+    80px,
+    35%,
+    "fs__h",
+    "expressive",
+    normal,
+    0.9,
+    inherit,
+    "heading"
+  ),
+  (
+    "fs-title",
+    40px,
+    45%,
+    "fs__t",
+    "expressive",
+    bold,
+    1.1,
+    Uppercase,
+    "heading-small"
+  ),
   (
     "fs-subtitle",
     40px,
@@ -78,10 +100,40 @@ $theme-typography: (
     inherit,
     "half"
   ),
-  ("fs-read", 18px, 33%, "fs__r", "productive", normal, 1.2, inherit),
-  ("fs-quote", 36px, 25%, "fs__q", "expressive", normal, 1.1, inherit, "base"),
-  ("fs-label", 18px, 25%, "fs__l", "accent", normal, 1.1, inherit, "half"),
-  ("fs-input", 18px, 25%, "fs__i", "productive", normal, 1.1, inherit, "half"),
+  ("fs-read", 18px, 33%, "fs__r", "productive", normal, 1.3, inherit),
+  (
+    "fs-quote",
+    36px,
+    25%,
+    "fs__q",
+    "expressive",
+    normal,
+    1.1,
+    inherit,
+    "heading-large"
+  ),
+  (
+    "fs-label",
+    18px,
+    25%,
+    "fs__l",
+    "accent",
+    normal,
+    1.1,
+    inherit,
+    "heading-base"
+  ),
+  (
+    "fs-input",
+    18px,
+    25%,
+    "fs__i",
+    "productive",
+    normal,
+    1.1,
+    inherit,
+    "heading-small"
+  ),
   ("fs-btn", 17px, 15%, "fs__b", "expressive", normal, 1.1, Uppercase),
   ("fs-meta", 14px, 25%, "fs__m", "accent", normal, 1.1, inherit),
   ("fs-nav", 16px, 25%, "fs__n", "productive", normal, 1.1, Uppercase),
@@ -96,14 +148,15 @@ $theme-typography: (
   semantic name, font-size, theme-font, font-weight, line-height, text-transform
 */
 $default-typography: (
-  ("h1", 48px, "expressive", normal, 1.2, inherit, "half"),
-  ("h2", 38px, "expressive", normal, 1.1, inherit, "half"),
-  ("h3", 28px, "productive", bold, 1.1, inherit, "half"),
-  ("h4", 22px, "productive", normal, 1.2, inherit, "half"),
-  ("h5", 18px, "expressive", normal, 1.1, inherit, "half"),
-  ("p", 17px, "productive", normal, 1.2, inherit, "half"),
-  ("input", 16px, "productive", normal, 1.1, inherit, "half"),
-  ("label", 16px, "productive", normal, 1.1, inherit, "half")
+  ("h1", 48px, "expressive", normal, 1.2, inherit, "heading"),
+  ("h2", 38px, "expressive", normal, 1.1, inherit, "heading-small"),
+  ("h3", 28px, "productive", bold, 1.1, inherit, "heading-small"),
+  ("h4", 22px, "productive", normal, 1.2, inherit, "heading-small"),
+  ("h5", 18px, "expressive", normal, 1.1, inherit, "heading-small"),
+  ("h6", 17px, "expressive", normal, 1.1, inherit, "heading-tiny"),
+  ("p", 17px, "productive", normal, 1.4, inherit, "heading-small"),
+  ("input", 16px, "productive", normal, 1.1, inherit, "heading-small"),
+  ("label", 16px, "productive", normal, 1.1, inherit, "heading-small")
 ) !default;
 
 //
@@ -129,22 +182,29 @@ $default-typography: (
 */
 $colors: (
   one: (
-    color: rgb(75, 199, 110),
-    mix: 4,
+    color: rgb(255, 199, 16),
+    mix: 14,
     tonsurton: 0,
   ),
   two: (
     color: rgb(0, 62, 169),
     mix: 8,
     tonsurton: 1,
+    custom: (
+      (
+        name: "custom",
+        bg: rgb(101, 83, 62),
+        text: white,
+      ),
+    ),
   ),
   info: (
     color: rgb(0, 149, 213),
     custom: (
       (
         name: "custom",
-        bg: rgb(62, 89, 101),
-        text: white,
+        bg: rgb(163, 198, 213),
+        text: rgb(24, 2, 75),
       ),
     ),
   ),
@@ -161,11 +221,11 @@ $colors: (
       ),
     ),
   ),
-  black: (
+  "black": (
     color: rgb(0, 0, 0),
     mix: 1,
   ),
-  white: (
+  "white": (
     color: rgb(255, 255, 255),
     mix: 1,
   ),
@@ -189,32 +249,40 @@ $theme-resizers: (
   "toy": 0.66,
   "big": 1.33,
 ) !default;
+
 //
-// SPACING
+// SCALES
 /*
   Create steps to space margins, paddings, gaps etc
-  Base Index can be used to create default paddings for boxes etc
-*/
-$helpers-layout-spacing: (
-  "0": 0px,
-  "1": 4px,
-  "2": 8px,
-  "3": 16px,
-  "4": 32px,
-  "5": 64px,
-  "6": 128px,
+  Define heights and margin bottoms
+  
+  ("3", 16px, ("heading-large", "box", "gap")),
+  utilit helper name, value px / rem, (array: static theme scale values)
+  
+  static scale theme values (changing names them will break layout scales):
+  box (padding)
+  gap (margin))
+  chip (height)
+  btn (height)
+  padding (padding default)
+  padding-small (padding small)
+  
+  non static theme values:
+  heading-tiny (margin-bottom tiny)
+  heading-small (margin-bottom small)
+  heading (margin-bottom default)
+  heading-large (margin-bottom small)
+  */
+$helpers-layout-scales: (
+  ("0", 0px, ()),
+  ("1", 4px, ("heading-tiny")),
+  ("2", 8px, ("padding-small", "heading-small")),
+  ("3", 16px, ("heading", "padding", "box", "gap")),
+  ("4", 32px, ("chip")),
+  ("5", 48px, ("btn")),
+  ("6", 128px, ())
 );
-//
-// SPACE BASE
-/*
-  Set default measurements to work with
-  base, half and quart
-  compiled as root variables --space-base, --space-half etc
-  used within box paddings, margin-bottom for typography
-*/
-$helper-layout-space-base: "3" !default;
-$helper-layout-space-half: "2" !default;
-$helper-layout-space-quart: "1" !default;
+
 //
 // SPACING
 /*
@@ -250,7 +318,7 @@ $helpers-layout-spacers: (
   ("ml-", ("margin-left"), ("all", "dv", "ds")),
   ("mx-", ("margin-left", "margin-right"), ("all", "dv", "ds")),
   ("my-", ("margin-top", "margin-bottom"), ("all", "dv", "ds")),
-  ("gap-", ("gap"), ("all", "dv", "ds"))
+  ("gap-", ("gap", "column-gap"), ("all", "dv", "ds"))
 ) !default;
 
 //
@@ -261,11 +329,24 @@ $helpers-layout-spacers: (
   Classname, procentual width, min-width, (Array: Breakpoints)
 */
 $helpers-layout-width: (
-  ("w-25", 25%, 250px, ("all", "dv", "ds")),
-  ("w-50", 50%, 500px, ("all", "dv", "ds")),
-  ("w-75", 75%, 750px, ("all", "dv", "ds")),
-  ("w-100", 100%, 1000px, ("all", "dv", "ds"))
+  ("w-25", 25%, 25%, ("all", "dv", "ds")),
+  ("w-50", 50%, 50%, ("all", "dv", "ds")),
+  ("w-75", 75%, 75%, ("all", "dv", "ds")),
+  ("w-100", 100%, 100%, ("all", "dv", "ds")),
+  ("mw-25", 25%, 250px, ("all", "dv", "ds")),
+  ("mw-50", 50%, 500px, ("all", "dv", "ds")),
+  ("mw-75", 75%, 750px, ("all", "dv", "ds")),
+  ("mw-100", 100%, 1000px, ("all", "dv", "ds"))
 ) !default;
+
+//
+// FLEX
+/*
+  create flex:1 etc
+*/
+$helpers-layout-flexcount: 4;
+$helpers-layout-flexbreakpoints: ("all", "dv", "ds");
+
 //
 // RATIO
 /*
@@ -274,7 +355,7 @@ $helpers-layout-width: (
   Classname, Width, Height (Array: Breakpoints)
 */
 // classname, width height, (breakpoints)
-$helpers-layout-ratio-prefix: "r-";
+$helpers-layout-ratio-prefix: "ra-";
 $helpers-layout-ratio: (
   ("1x1", 1, 1, ("all", "dv", "ds")),
   ("16x9", 16, 9, ("all", "dv", "ds")),
@@ -288,7 +369,8 @@ $helpers-layout-ratio: (
 $btn-base: (
   border: 0px,
   outline: 0px solid transparent,
-  padding: var(--space-base),
+  padding-left: var(--scale-padding),
+  padding-right: var(--scale-padding),
   border-radius: $border-radius-clickables,
   align-self: flex-start,
 );
@@ -302,13 +384,43 @@ $btn-active: (
   background-color: var(--color-bg),
 );
 $btn-line: (
-  border-width: 2px,
+  border-width: $border-width,
   border-style: solid,
 );
 $btn-disabled: (
   background-color: var(--color-bg),
 );
 $btn-animation: "tile";
+
+//
+// CHIPS
+/*
+*/
+$chip-base: (
+  border: 0px,
+  outline: 0px solid transparent,
+  padding: var(--scale-padding),
+  border-radius: $border-radius-clickables,
+  align-self: flex-start,
+  background-color: var(--color-bg),
+);
+$chip-focus: (
+  outline: 1px solid var(--color-one),
+  background-color: var(--color-bg),
+  border-radius: $border-radius-clickables,
+);
+$chip-active: (
+  box-shadow: 0 0 2px 0 var(--color-one),
+  background-color: var(--color-bg),
+);
+$chip-line: (
+  border-width: 2px,
+  border-style: solid,
+);
+$chip-disabled: (
+  background-color: var(--color-bg),
+);
+$chip-animation: "tile";
 //
 // ANIMATIONS
 /*

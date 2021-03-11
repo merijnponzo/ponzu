@@ -1,3 +1,13 @@
+// add layout scale elements ass css variables
+:root {
+  @each $name, $value, $scale-elements in $helpers-layout-scales {
+    @each $scale-element-name in $scale-elements {
+      @debug $scale-element-name $value;
+      --scale-#{$scale-element-name}: rfs(#{$value});
+    }
+  }
+}
+
 // generate width helpers
 #{$prioritize-helpers} {
   @each $name, $width-percent, $max-width-px,
@@ -30,24 +40,6 @@
   }
 }
 
-@mixin aspect-ratio($width, $height) {
-  position: relative;
-  &:before {
-    display: block;
-    content: " ";
-    width: 100%;
-    padding-top: ($height / $width) * 100%;
-  }
-
-  > .content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-  }
-}
-
 @each $name, $width, $height, $breakpoints in $helpers-layout-ratio {
   // generate width helpers width breakpoints
   @each $breakpoint in $breakpoints {
@@ -57,29 +49,13 @@
   }
 }
 
-#{$prioritize-helpers} {
-  // loop trough spacers (eg : pt- )
-  @each $name, $css-properties, $breakpoints in $helpers-layout-spacers {
-    // create spacer class on each spacing setting ( eg : 1 : 16px )
-    @each $sub-name, $value in $helpers-layout-spacing {
-      // (eg pt-1 )
-      @each $breakpoint in $breakpoints {
-        @include select-breakpoint($breakpoint) {
-          @include any-property-class(
-            $name,
-            $sub-name,
-            $value,
-            $css-properties,
-            $breakpoint
-          );
-        }
-      }
+// flex helpers
+/*
+@for $i from 1 through $helpers-layout-flexcount {
+  @each $breakpoint in $helpers-layout-flexbreakpoints {
+    @include select-breakpoint($breakpoint) {
+      @include flex-count($i, $breakpoint);
     }
   }
 }
-
-:root {
-  @each $name, $value in $helpers-layout-spacing {
-    --space-#{$name}: rfs(#{$value});
-  }
-}
+*/

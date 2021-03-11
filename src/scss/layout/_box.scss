@@ -14,7 +14,7 @@ $box-space-half: get-space-value("half") !default;
   grid-column: span 12;
   clear: both;
   width: 100%;
-  padding: rfs($box-space-base);
+  padding: rfs(var(--scale-box));
   font-family: var(--productive);
   font-size: var(--fs-read);
   line-height: fontGuide("fs-read", "line-height");
@@ -42,8 +42,22 @@ $box-space-half: get-space-value("half") !default;
     display: block;
     margin: 1rem 0;
   }
+  & > .btn {
+    margin-top: var(--scale-gap);
+  }
+  // gap polyfill with negative margin based on it's --gap var
+  & > .box {
+    padding: 0px;
+    margin-left: calc(-1 * var(--gap) / 2);
+    margin-right: calc(-1 * var(--gap) / 2);
+    width: calc(100% + var(--gap));
+    .btn {
+      margin-left: calc(var(--gap) / 2);
+      margin-right: calc(var(--gap) / 2);
+    }
+  }
   .btn {
-    margin-top: 1rem;
+    margin-top: var(--scale-gap);
   }
 }
 .box.stretch {

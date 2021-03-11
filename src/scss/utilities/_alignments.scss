@@ -1,0 +1,17 @@
+// direction horizontal
+#{$prioritize-helpers} {
+  .dir-x {
+    flex-direction: row;
+  }
+  .dir-y {
+    flex-direction: column;
+  }
+  [class*="spread"] {
+    justify-content: space-between;
+  }
+  .spread-eq {
+    & > * {
+      flex: 1 1 auto;
+    }
+  }
+}

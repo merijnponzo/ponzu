@@ -1,23 +1,23 @@
 html {
-  font-size: 16px;
+  font-size: $html-fontsize-default;
   font-family: var(--font-read);
   box-sizing: border-box;
   line-height: 1.1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+// default gap, dont change
 :root {
-  --space-base: rfs(#{get-space-value("base")});
-  --space-half: rfs(#{get-space-value("half")});
-  --space-quart: rfs(#{get-space-value("quart")});
+  --gap: 0px;
 }
+
 @include view-l {
   html {
-    font-size: 16px;
+    font-size: $html-fontsize-large;
   }
 }
 @include view-w {
   html {
-    font-size: 18px;
+    font-size: $html-fontsize-wide;
   }
 }

@@ -1,0 +1,12 @@
+[class*="group"] {
+  display: flex;
+}
+.group-x {
+  width: 100%;
+  & > * {
+    flex: 1;
+  }
+}
+.group-y {
+  width: 100%;
+}

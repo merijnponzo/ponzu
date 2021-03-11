@@ -1,17 +1,3 @@
-@mixin colorClasses($label, $tone, $background-color, $foreground-color) {
-  --color-#{$label}-#{$tone}: #{$background-color};
-  // move classes above :root
-  @at-root {
-    // add class
-    body {
-      .#{$label}-#{$tone} {
-        background: #{$background-color};
-        color: $foreground-color;
-      }
-    }
-  }
-}
-
 :root {
   color: testing();
   @each $label, $map in $colors {
@@ -64,6 +50,13 @@
         .#{$label} {
           background: #{$color};
           color: choose-color-contrast($color);
+          &.line {
+            border-color: #{$color};
+            background-color: transparent;
+            border-width: $border-width;
+            border-style: solid;
+            color: inherit;
+          }
         }
         .#{$label}-b {
           background: #{$color};
@@ -90,7 +83,7 @@
   }
 }
 
-// create color themes
+// create color themes [ DEPRECATED ]
 @each $name, $bg-color, $text-color in $color-themes {
   // set colors
 

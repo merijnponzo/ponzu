@@ -54,25 +54,6 @@
   }
 }
 
-@function get-space-value($match-base: "base") {
-  $layout-base-found: 0;
-  // get base value
-  $base-value: "null";
-  @if ($match-base == "base") {
-    $base-value: $helper-layout-space-base;
-  } @else if($match-base == "half") {
-    $base-value: $helper-layout-space-half;
-  } @else if($match-base == "quart") {
-    $base-value: $helper-layout-space-quart;
-  }
-  @each $index, $value in $helpers-layout-spacing {
-    @if $index == $base-value {
-      $layout-base-found: $value;
-    }
-  }
-  @if ($layout-base-found) {
-    @return $layout-base-found;
-  } @else {
-    @return 16px;
-  }
+@function get-element-scale($match-base: "base") {
+  @return 16px;
 }

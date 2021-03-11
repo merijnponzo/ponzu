@@ -1,10 +1,11 @@
 <template>
   <section class="my-4">
     <div class="row">
-      <div class="c12 two-1 big">
+      <div class="c12 two-1 big p-4">
+        <h1 class="fs__h info-f">Color Themes</h1>
         <div class="box">
           <h1 class="white-f">This is amazing</h1>
-          <p class="text-c w-75">
+          <p class="text-c">
             H6 The quick brown fox jumps over the lazy dog Lorem ipsum dolor sit
             amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
             ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
@@ -12,7 +13,15 @@
             consequat. Duis aute irure dolor in reprehenderit in voluptate velit
             esse cillum dolore eu fugiat nulla pariatur
           </p>
-          <button class="btn two-6">Hello</button>
+          <div class="box mt-3 w-50">
+            <button class="btn two-6">Btn</button>
+            <button class="btn one">Line btn</button>
+            <button class="btn two">Line btn</button>
+          </div>
+          <div class="box dir-x spread-eq gap-5">
+            <button class="btn two">Btn</button>
+            <button class="btn two">Btn</button>
+          </div>
         </div>
       </div>
     </div>
