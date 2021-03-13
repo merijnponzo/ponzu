@@ -318,7 +318,7 @@ $helpers-layout-spacers: (
   ("ml-", ("margin-left"), ("all", "dv", "ds")),
   ("mx-", ("margin-left", "margin-right"), ("all", "dv", "ds")),
   ("my-", ("margin-top", "margin-bottom"), ("all", "dv", "ds")),
-  ("gap-", ("gap", "column-gap"), ("all", "dv", "ds"))
+  ("gap-", ("gap"), ("all", "dv", "ds"))
 ) !default;
 
 //

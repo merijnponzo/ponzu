@@ -10,7 +10,7 @@ $gridColumns: 12 !default;
   display: grid;
   gap: var(--gap);
   row-gap: var(--gap);
-  column-gap: var(--gap);
+  // column-gap: var(--gap);
   grid-template-columns: repeat($gridColumns, #{$gridColumns}fr);
   flex-direction: column;
   flex-wrap: wrap;

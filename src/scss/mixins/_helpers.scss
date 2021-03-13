@@ -59,18 +59,32 @@
   @if $breakpoint == "all" {
     .#{$name}#{$sub-name} {
       @each $css-property in $css-properties {
-        #{$css-property}: rfs(#{$value});
         @if $css-property == "gap" {
-          --gap: rfs(#{$value});
+          @if $value > 100px {
+            // --gap: rfs(60px);
+            #{$css-property}: rfs(100px);
+          } @else {
+            //--gap: rfs(#{$value});
+            #{$css-property}: rfs(#{$value});
+          }
+        } @else {
+          #{$css-property}: rfs(#{$value});
         }
       }
     }
   } @else if $breakpoint != 0 {
     .#{$name}#{$sub-name}\3a#{$breakpoint} {
       @each $css-property in $css-properties {
-        #{$css-property}: rfs(#{$value});
         @if $css-property == "gap" {
-          --gap: rfs(#{$value});
+          @if $value > 80px {
+            --gap: rfs(80px);
+            #{$css-property}: rfs(80px);
+          } @else {
+            --gap: rfs(#{$value});
+            #{$css-property}: rfs(#{$value});
+          }
+        } @else {
+          #{$css-property}: rfs(#{$value});
         }
       }
     }
